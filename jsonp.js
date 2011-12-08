@@ -1,8 +1,8 @@
-// [jsonp.js](http://neocotic.com/jsonp.js) 1.0.0
-// (c) 2011 Alasdair Mercer
-// Freely distributable under the MIT license.
-// For all details and documentation:
-// http://neocotic.com/jsonp.js
+// [jsonp.js](http://neocotic.com/jsonp.js) 1.0.0  
+// (c) 2011 Alasdair Mercer  
+// Freely distributable under the MIT license.  
+// For all details and documentation:  
+// <http://neocotic.com/jsonp.js>
 
 (function (root) {
 
@@ -17,7 +17,7 @@
     // Save the previous value of the `JSONP` variable.
     previousJSONP = root.JSONP,
     // Timeout IDs for removing callback functions where the `timeout` setting
-    // has been set.
+    // has been set.  
     // IDs should be removed once either the callback is called or the request
     // has timed out (as specified by the `timeout` setting).
     timers        = {};
@@ -51,10 +51,10 @@
     // Variables
     // ---------
 
-    // Callback functions for activate JSONP requests.
+    // Callback functions for activate JSONP requests.  
     // Functions should removed once they have been called. If the `timeout`
     // setting has been set and the function has not yet been called, that
-    // function will be removed.
+    // function will be removed.  
     // This property must be public since the callback is called in global
     // context.
     __callbacks: {},
@@ -121,7 +121,7 @@
     // -----------------
 
     // Run jsonp.js in *noConflict* mode, returning the `JSONP` variable to its
-    // previous owner.
+    // previous owner.  
     // Returns a reference to `JSONP`.
     noConflict: function () {
       root.JSONP = previousJSONP;
