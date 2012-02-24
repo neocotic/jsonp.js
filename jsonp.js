@@ -1,5 +1,5 @@
 // [jsonp.js](http://neocotic.com/jsonp.js) 1.0.0  
-// (c) 2011 Alasdair Mercer  
+// (c) 2012 Alasdair Mercer  
 // Freely distributable under the MIT license.  
 // For all details and documentation:  
 // <http://neocotic.com/jsonp.js>
@@ -9,7 +9,6 @@
   // Private variables
   // -----------------
 
-  
   var
     // Initially the current time but incremented by each call to `get` in order
     // to ensure unique identifiers.
@@ -40,16 +39,16 @@
   // -----------
 
   // Build the publicly exposed API.
-  root.JSONP = {
+  var JSONP = {
 
-    // Constants
-    // ---------
+    // Public Constants
+    // ----------------
 
     // Current version of `JSONP`.
     VERSION: '1.0.0',
 
-    // Variables
-    // ---------
+    // Public Variables
+    // ----------------
 
     // Callback functions for activate JSONP requests.  
     // Functions should removed once they have been called. If the `timeout`
@@ -57,16 +56,14 @@
     // function will be removed.  
     // This property must be public since the callback is called in global
     // context.
-    __callbacks: {},
+    __callbacks__: {},
 
-    // Settings to allow further configuration of JSONP.
-    settings: {
-      // Name of the callback parameter included in the query string.
-      callbackName : 'callback',
-      // Timeout (in milliseconds) for the request. Requests will only be timed
-      // out if this is greater than zero.
-      timeout      : 0
-    },
+    // Name of the callback parameter included in the query string.
+    callbackName: 'callback',
+
+    // Timeout (in milliseconds) for the request. Requests will only be timed
+    // out if this is greater than zero.
+    timeout: 0,
 
     // JSONP functions
     // ---------------
@@ -86,34 +83,34 @@
                  document.documentElement,
         script = document.createElement('script');
       id++;
-      JSONP.__callbacks[id] = function () {
+      JSONP.__callbacks__[id] = function A() {
         // Clear any timeout.
         clearTimeout(timers[id]);
         // Delete all references.
         delete timers[id];
-        delete JSONP.__callbacks[id];
+        delete JSONP.__callbacks__[id];
         // Call the callback function with arguments.
         callback.apply(context, arguments);
       };
       // Build query string.
       url += (url.indexOf('?') === -1) ? '?' : '&';
-      url += JSONP.settings.callbackName + '=' +
-             encodeURIComponent('JSONP.__callbacks[' + id + ']');
+      url += JSONP.callbackName + '=' +
+             encodeURIComponent('JSONP.__callbacks__[' + id + ']');
       url += paramify(data);
       script.src = url;
       // Add script element to head, while preventing IE6 bug.
       head.insertBefore(script, head.firstChild);
       // Create timer if `timeout` setting is set.
-      if (JSONP.settings.timeout > 0) {
-        timers[id] = setTimeout(function () {
+      if (JSONP.timeout > 0) {
+        timers[id] = setTimeout(function B() {
           // Delete all references.
-          delete JSONP.__callbacks[id];
+          delete JSONP.__callbacks__[id];
           delete timers[id];
           // Remove the script element from head.
           if (head && script.parentNode) head.removeChild(script);
           // Dereference the script.
-          script = undefined;
-        }, JSONP.settings.timeout);
+          script = null;
+        }, JSONP.timeout);
       }
     },
 
@@ -129,5 +126,17 @@
     }
 
   };
+
+  // Support
+  // -------
+
+  // Export `JSONP` for CommonJS.
+  if (typeof define === 'function' && define.amd) {
+    define('JSONP', function Z() {
+      return JSONP;
+    });
+  } else {
+    root.JSONP = JSONP;
+  }
 
 }(this));

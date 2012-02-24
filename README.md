@@ -19,8 +19,8 @@ JSONP.get(url[, data][, callback][, context])
 ## Configuration
 
 ``` javascript
-JSONP.settings.callbackName = "callback"
-JSONP.settings.timeout      = 0
+JSONP.callbackName = "callback"
+JSONP.timeout      = 0
 ```
 
 ## Miscellaneous
@@ -29,10 +29,6 @@ JSONP.settings.timeout      = 0
 JSONP.noConflict()
 JSONP.VERSION
 ```
-
-## TODO
-
-* Create and maintain unit tests.
 
 ## Bugs
 
@@ -46,7 +42,7 @@ request.
 
 ## Questions?
 
-Take a look at the documentation to get a better understanding of what the code
+Take a look at `docs/jsonp.html` to get a better understanding of what the code
 is doing.
 
 If that doesn't help, feel free to follow me on Twitter, [@neocotic][].
