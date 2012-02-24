@@ -37,9 +37,6 @@ currently in development you can do so here;
 
 https://github.com/neocotic/jsonp.js/issues
 
-Developers should run all tests and ensure they pass before submitting a pull
-request.
-
 ## Questions?
 
 Take a look at `docs/jsonp.html` to get a better understanding of what the code
